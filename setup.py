@@ -5,9 +5,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='django_hipster_api',
-    version='1.4',
+    version='1.5',
     packages=find_packages(),
-    install_requires='hipster_api',
+    install_requires='',
     url='https://github.com/RustoriaRu/hipster_api',
     license='MIT',
     author='vir-mir',
