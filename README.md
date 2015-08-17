@@ -1,6 +1,18 @@
 # hipster_api
 wrapper django rest framework
 
+Подключение
+```python
+INSTALLED_APPS = (
+...
+'rest_framework',
+'hipster_api',
+)
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\', '/'),
+)
+```
+
 ## Применение
 Для удобства использования restapi в вашем проекте
 
