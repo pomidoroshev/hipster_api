@@ -59,7 +59,7 @@ description = 'тес тест'
 ## Собираем документацию 
 `python manage.py hipster_api_doc`
 
-### вывод в щаблоне 
+### вывод в шаблоне 
 
 ```html
 {% block container %}
