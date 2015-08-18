@@ -34,11 +34,11 @@ def get_package_data(package):
 
 setup(
     name='django_hipster_api',
-    version='1.6.5',
+    version='1.6.6',
     packages=get_packages('hipster_api'),
     package_data=get_package_data('hipster_api'),
     long_description=read("hipster_api/README.md"),
-    install_requires='',
+    install_requires=['pytz>=2015.4'],
     url='https://github.com/RustoriaRu/hipster_api',
     license='MIT',
     author='vir-mir',

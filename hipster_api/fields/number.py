@@ -19,14 +19,14 @@ class Integer(Field):
 
 class IntegerLarger(Integer):
 
-    def __init__(self, larger, glt=False, **kwargs):
+    def __init__(self, larger, equals=False, **kwargs):
         self.larger = larger
-        self.glt = glt
+        self.equals = equals
         super(IntegerLarger, self).__init__(**kwargs)
 
     def to_python(self):
         value = super(IntegerLarger, self).to_python()
-        if self.glt:
+        if self.equals:
             if value < self.larger:
                 value = self.default
         elif value <= self.larger:
@@ -45,3 +45,77 @@ class IntegerList(_StringList):
             return self.to_python()
         self.value = value
         return value
+
+
+class IntegerLess(Integer):
+    def __init__(self, less, equals=False, **kwargs):
+        self.less = less
+        self.equals = equals
+        super(IntegerLess, self).__init__(**kwargs)
+
+    def to_python(self):
+        value = super(IntegerLess, self).to_python()
+        if self.equals:
+            if value > self.less:
+                value = self.default
+        elif value >= self.less:
+            value = self.default
+        self.value = value
+        return value
+
+
+class Float(Field):
+    def to_python(self):
+        value = super(Float, self).to_python()
+        try:
+            value = float(str(value).replace(',', '.'))
+        except ValueError:
+            value = self.default
+
+        self.setitem(value)
+
+
+class FloatLess(Float):
+    def __init__(self, less, equals=False, **kwargs):
+        self.less = less
+        self.equals = equals
+        super(FloatLess, self).__init__(**kwargs)
+
+    def to_python(self):
+        value = super(FloatLess, self).to_python()
+        if self.equals:
+            if value > self.less:
+                value = self.default
+        elif value >= self.less:
+            value = self.default
+        self.value = value
+
+
+class FloatLarger(Float):
+    def __init__(self, larger, equals=False, **kwargs):
+        self.larger = larger
+        self.equals = equals
+        super(FloatLarger, self).__init__(**kwargs)
+
+    def to_python(self):
+        value = super(FloatLarger, self).to_python()
+        if self.equals:
+            if value < self.larger:
+                value = self.default
+        elif value <= self.larger:
+            value = self.default
+        self.value = value
+
+
+class FloatList(_StringList):
+    def to_python(self):
+        value = super(FloatList, self).to_python()
+        try:
+            if self.separator != ',':
+                value = list(map(lambda x: float(x.replace(',', '.')), value))
+            else:
+                value = list(map(lambda x: float(x), value))
+        except ValueError:
+            self.value = self.default
+            return self.to_python()
+        self.value = value
