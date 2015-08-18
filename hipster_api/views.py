@@ -49,6 +49,8 @@ class HView(APIView):
         return new_request
 
     def __set_media(self, data):
+        if 'Fields' not in self.__class__.__dict__:
+            return None
         for key, val in self.__class__.__dict__['Fields'].__dict__.items():
             if isinstance(val, Field):
                 val.setitem(data.get(key, val.default)).to_python()

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import re
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver
-from django.utils.importlib import import_module
+import sys
 
 
 def url_pattern(url_pattern_regex, url_parent=''):
@@ -26,13 +27,42 @@ def url_pattern(url_pattern_regex, url_parent=''):
         url_parent = url_parent[1:]
 
     url = '/%s%s' % (url, url_parent)
-    url = url.replace('\.(?P<format>\w+)$', '.json')
+    url = url.replace('\.(?P<format>\w+)$', '.json').replace('?P', '')
+    url = re.sub(r'[\?\$\^]+', '', url, re.IGNORECASE)
+    url = url.strip('/').split('/')
+
+    def ulr_format(item):
+        arg = ':arg'
+        item = re.sub(r'(\\\w?)+', '', item, re.IGNORECASE)
+        p = re.compile(ur'\<(?P<name>\w+)\>', re.IGNORECASE)
+        match = re.findall(p, item)
+
+        if len(match) == 1:
+            arg = match[0]
+
+        item = re.sub(r'([^a-zА-Я0-9_-])+', '', item, re.IGNORECASE)
+
+        if item == '':
+            item = arg
+        elif arg == item:
+            item = ':%s' % arg
+        return item
+    url = list(map(ulr_format, url))
+
+    if not all(url) or len(url) == 1 and url[0] == ':arg':
+        url = ['']
+    else:
+        url = [''] + url
+
+    url.append('')
+    url = '/'.join(url)
 
     return url, callback
 
 
 def search_ulrs():
-    urls = import_module(settings.ROOT_URLCONF)
+    __import__(settings.ROOT_URLCONF)
+    urls = sys.modules[settings.ROOT_URLCONF]
     urls_pars = []
     for url in urls.urlpatterns:
         if isinstance(url, RegexURLResolver):
