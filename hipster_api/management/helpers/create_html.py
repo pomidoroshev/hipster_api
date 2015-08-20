@@ -22,9 +22,9 @@ os.mkdir(os.path.join(dj_settings.TEMPLATE_DIRS[0], 'docs', 'files'))
 
 
 def render_doc(item):
-    url = '/docs/api%s' % item['url'].replace('.json', '')
+    url = '/docs/api%s' % item['url']
     body = render_to_string('docs/skeleton/body2.html', item)
-    file_name = 'docs_api%s.html' % item['url'].replace('/', '_').replace('.json', '')
+    file_name = 'docs_api%s.html' % item['url'].replace('/', '_')
     file_name = os.path.join(dj_settings.TEMPLATE_DIRS[0], 'docs', 'files', file_name)
     f = io.open(file_name, 'w+', encoding='utf8')
     f.write(body)

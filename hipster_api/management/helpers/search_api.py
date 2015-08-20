@@ -27,7 +27,11 @@ def url_pattern(url_pattern_regex, url_parent=''):
         url_parent = url_parent[1:]
 
     url = '/%s%s' % (url, url_parent)
-    url = url.replace('\.(?P<format>\w+)$', '.json').replace('?P', '')
+    url = url.replace('\.(?P<format>\w+)$', '.api').replace('?P', '')
+    is_sep = url[-2:] == '/$' or url[-3:] == '/?$'
+    format_name = url.split('.').pop() if url.split('.').pop() == 'api' else ''
+    if format_name == 'api':
+        url = '.'.join(url.split('.')[:-1])
     url = re.sub(r'[\?\$\^]+', '', url, re.IGNORECASE)
     url = url.strip('/').split('/')
 
@@ -47,6 +51,7 @@ def url_pattern(url_pattern_regex, url_parent=''):
         elif arg == item:
             item = ':%s' % arg
         return item
+
     url = list(map(ulr_format, url))
 
     if not all(url) or len(url) == 1 and url[0] == ':arg':
@@ -54,8 +59,11 @@ def url_pattern(url_pattern_regex, url_parent=''):
     else:
         url = [''] + url
 
-    url.append('')
     url = '/'.join(url)
+    if format_name == 'api':
+        url = '%s.api' % url
+    elif is_sep:
+        url = '%s/' % url
 
     return url, callback
 
