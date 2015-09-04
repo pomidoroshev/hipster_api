@@ -34,7 +34,7 @@ def get_package_data(package):
 
 setup(
     name='django_hipster_api',
-    version='1.6.9',
+    version='1.7.0',
     packages=get_packages('hipster_api'),
     package_data=get_package_data('hipster_api'),
     long_description=read("hipster_api/README.md"),

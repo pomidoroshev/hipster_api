@@ -11,7 +11,10 @@ class String(Field):
     def to_python(self):
         value = super(String, self).to_python()
         try:
-            value = str(value)
+            try:
+                value = str(value)
+            except UnicodeEncodeError:
+                value = unicode(value)
         except ValueError:
             value = str(self.default)
 
