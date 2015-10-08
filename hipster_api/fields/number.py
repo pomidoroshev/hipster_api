@@ -71,8 +71,8 @@ class Float(Field):
             value = float(str(value).replace(',', '.'))
         except ValueError:
             value = self.default
-
         self.setitem(value)
+        return self.value
 
 
 class FloatLess(Float):

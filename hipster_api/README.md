@@ -95,3 +95,21 @@ description = 'тес тест'
 ```
 
 `file_name` - должен путь к доке `docs/files/...`
+
+# реализованные поля
+
+* [x] String
+* [x] StringList
+* [x] FieldsListResponse
+* [x] Integer
+* [x] IntegerLarger
+* [x] IntegerList
+* [x] IntegerLess
+* [x] Float
+* [x] FloatLess
+* [x] FloatLarger
+* [x] FloatList
+* [x] Boolean
+* [x] DateTime
+* [x] Date
+* [x] JsonField

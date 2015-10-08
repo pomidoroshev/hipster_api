@@ -111,3 +111,4 @@ description = 'тес тест'
 * [x] Boolean
 * [x] DateTime
 * [x] Date
+* [x] JsonField

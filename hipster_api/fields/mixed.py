@@ -35,13 +35,14 @@ class DateTime(_String):
             return self.setitem(datetime.datetime.now())
         try:
             value = datetime.datetime.strptime(value, self.date_format).replace(tzinfo=timezone)
-        except ValueError:
-            if hasattr(self.default, '__call__'):
+        except (ValueError, TypeError):
+            if callable(self.default):
                 return self.setitem(self.default())
             try:
                 value = datetime.datetime.strptime(self.default, self.date_format).replace(tzinfo=timezone)
-            except ValueError:
-                value = datetime.datetime.now(timezone)
+            except (ValueError, TypeError):
+                value = datetime.datetime.strptime(
+                    self.default.strftime(self.date_format), self.date_format).replace(tzinfo=timezone)
         self.setitem(value)
 
 
