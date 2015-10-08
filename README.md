@@ -1,6 +1,10 @@
 # hipster_api
 wrapper django rest framework
 
+Travis-ci tests
+
+![alt tag](https://api.travis-ci.org/RustoriaRu/hipster_api.svg)
+
 Подключение
 ```python
 INSTALLED_APPS = (
