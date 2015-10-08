@@ -34,7 +34,7 @@ def get_package_data(package):
 
 setup(
     name='django_hipster_api',
-    version='1.7.1',
+    version='1.7.2',
     packages=get_packages('hipster_api'),
     package_data=get_package_data('hipster_api'),
     long_description=read("hipster_api/README.md"),
@@ -54,7 +54,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.5-dev',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ]
 )
