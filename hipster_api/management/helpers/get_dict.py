@@ -57,14 +57,14 @@ def format_method_urls(item):
     item = {'url': url, 'text': text, 'class': cls.__name__}
     methods = {}
     fields = []
-    for el in cls.__dict__.itervalues():
+    for el in cls.__dict__.values():
         try:
 
             if el.__name__.lower() in ['get', 'put', 'post', 'delete']:
                 methods[el.__name__.lower()] = parse_doc_block(el.__doc__)
             elif el.__name__ == 'Fields':
                 fields = list(filter(
-                    lambda x: x is not None, [parse_filed_urls(x, y) for x, y in el.__dict__.iteritems()]))
+                    lambda x: x is not None, [parse_filed_urls(x, y) for x, y in el.__dict__.items()]))
 
         except AttributeError:
             pass
