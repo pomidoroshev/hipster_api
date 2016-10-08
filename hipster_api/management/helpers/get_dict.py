@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 from hipster_api.fields import Field
 
 
 def parse_doc_block(docs):
-    docs = smart_unicode(docs)
+    docs = smart_text(docs)
     blocks = {
         'text': None
     }

@@ -38,7 +38,7 @@ def url_pattern(url_pattern_regex, url_parent=''):
     def ulr_format(item):
         arg = ':arg'
         item = re.sub(r'(\\\w?)+', '', item, re.IGNORECASE)
-        p = re.compile(ur'\<(?P<name>\w+)\>', re.IGNORECASE)
+        p = re.compile(r'\<(?P<name>\w+)\>', re.IGNORECASE)
         match = re.findall(p, item)
 
         if len(match) == 1:

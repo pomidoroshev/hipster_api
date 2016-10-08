@@ -33,7 +33,7 @@ def get_package_data(package):
     return {package: filepaths}
 
 setup(
-    name='django_hipster_api',
+    name='hipster_api',
     version='1.7.2',
     packages=get_packages('hipster_api'),
     package_data=get_package_data('hipster_api'),

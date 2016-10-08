@@ -7,7 +7,7 @@ from hipster_api.management.helpers import create_html
 
 
 class Command(BaseCommand):
-    help = 'Зборка api для проекта'
+    help = 'Сборка api для проекта'
 
     def handle(self, *args, **kwargs):
         api = search_api.search_ulrs()
