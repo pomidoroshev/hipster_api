@@ -69,33 +69,6 @@ description = 'тес тест'
 
 ```
 
-## Собираем документацию 
-`python manage.py hipster_api_doc`
-
-### вывод в шаблоне 
-
-```html
-{% block container %}
-    <div class="row">
-        <div class="col-md-9" role="main">
-            {% if file_name %}
-                {% include file_name %}
-            {% endif %}
-        </div>
-        <div class="col-md-3" role="complementary">
-            <nav class="affix">
-                <ul class="nav">
-                    {% include 'docs/menu2.html' %}
-                </ul>
-
-            </nav>
-        </div>
-    </div>
-{% endblock %}
-```
-
-`file_name` - должен путь к доке `docs/files/...`
-
 # реализованные поля
 
 * [x] String
